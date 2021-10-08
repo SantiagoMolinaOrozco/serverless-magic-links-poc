@@ -1,4 +1,27 @@
-# Cognito magic links POC
+## Fork From: [serverless-magic-links-poc](https://github.com/leanmotherfuckers/serverless-magic-links-poc)
+
+This fork removes the front code that is not necessary in many cases, solves several errors and gives rise to two serverless implementations with previously mounted cognito and generating a new cognito environment.
+
+1. You can use just the lambda upload or lambda with cognito config just need to change serverless-cognito.yml to serverless.yml
+   - If you want to use excisting cognito config you need to remplace `USER_POOL_ID` `$SENDEREMAIL`, and `USER_POOL_NAME` in your serverless.yml
+2. You can change region if you need, for default this repo use: `region: us-east-1`
+3. Run with `Yarn install` and `yarn deploy`
+4. Probably you need to Add config in AWS console
+   - Lambda -> Configuration -> Permissions -> Open `Execution role` Link
+      - Then Attach polices:
+         - AmazonSESFullAccess
+         - AmazonCognitoPowerUser
+   - Open your cognito pool config -> attributes
+      - Add custom attribute
+         - Name: authChallenge
+         - AttributeDataType: String
+         - Mutable: true
+
+
+*original repo's instructions below this line*
+----
+
+# Cognito magic links
 
 This simple POC shows a good way to create a [user-friendly magic link login system](https://uxdesign.cc/user-friendly-magic-links-e39023ec3e2) using AWS Cognito, Lambda and the Serverless framework.
 
@@ -60,7 +83,7 @@ Before you can test the magic link, you need to create at least one user in the 
 2. Select the pool created by your service, e.g. `sls-magic-link-poc-user-pool-lewis`
 3. Go to `General settings \ Users and groups` to create a user. Use an email for username.
 
-### 5. Test magic links 
+### 5. Test magic links
 
 1. Go to the login page's URL of your service, e.g. `https://h3avtopjn8.execute-api.eu-west-1.amazonaws.com/dev`
 2. Make sure you put in an email address of a user you have already created in the previous step.
