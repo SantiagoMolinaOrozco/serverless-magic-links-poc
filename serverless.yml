@@ -40,6 +40,15 @@ functions:
           trigger: VerifyAuthChallengeResponse
           existing: true
 
+  # 4. Pre sign-up autoconfirm user
+  pre-sign-up:
+    handler: api/autoconfirm-user.handler
+    events:
+      - cognitoUserPool:
+          pool: ${self:custom.userPoolName}
+          trigger: PreSignUp
+          existing: true
+
 # Default serverless stuff
 provider:
   name: aws

@@ -16,7 +16,7 @@ This fork removes the front code that is not necessary in many cases, solves sev
          - Name: authChallenge
          - AttributeDataType: String
          - Mutable: true
-
+5. If you dont want to use autoconfirm-user, you can remove the 4 step in serverless.yml
 
 *original repo's instructions below this line*
 ----
